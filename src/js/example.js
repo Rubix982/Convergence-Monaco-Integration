@@ -16,34 +16,34 @@ require(['vs/editor/editor.main', 'MonacoCollabExt'], function(m, MonacoCollabEx
   //
   // Create the target editor where events will be played into.
   //
-  const target = monaco.editor.create(document.getElementById("target-editor"), {
-    value: editorContents,
-    theme: "vs-dark'",
-    language: 'javascript',
-    readOnly: true
-  });
+  // const target = monaco.editor.create(document.getElementById("target-editor"), {
+  //   value: editorContents,
+  //   theme: "vs-dark'",
+  //   language: 'javascript',
+  //   readOnly: true
+  // });
 
-  const remoteCursorManager = new MonacoCollabExt.RemoteCursorManager({
-    editor: target,
-    tooltips: true,
-    tooltipDuration: 2
-  });
-  const sourceUserCursor = remoteCursorManager.addCursor(sourceUser.id, sourceUser.color, sourceUser.label);
-  const staticUserCursor = remoteCursorManager.addCursor(staticUser.id, staticUser.color, staticUser.label);
+  // const remoteCursorManager = new MonacoCollabExt.RemoteCursorManager({
+  //   editor: target,
+  //   tooltips: true,
+  //   tooltipDuration: 2
+  // });
+  // const sourceUserCursor = remoteCursorManager.addCursor(sourceUser.id, sourceUser.color, sourceUser.label);
+  // const staticUserCursor = remoteCursorManager.addCursor(staticUser.id, staticUser.color, staticUser.label);
 
-  const remoteSelectionManager = new MonacoCollabExt.RemoteSelectionManager({editor: target});
-  remoteSelectionManager.addSelection(sourceUser.id, sourceUser.color, sourceUser.label);
-  remoteSelectionManager.addSelection(staticUser.id, staticUser.color, staticUser.label);
+  // const remoteSelectionManager = new MonacoCollabExt.RemoteSelectionManager({editor: target});
+  // remoteSelectionManager.addSelection(sourceUser.id, sourceUser.color, sourceUser.label);
+  // remoteSelectionManager.addSelection(staticUser.id, staticUser.color, staticUser.label);
 
-  const targetContentManager = new MonacoCollabExt.EditorContentManager({
-    editor: target
-  });
+  // const targetContentManager = new MonacoCollabExt.EditorContentManager({
+  //   editor: target
+  // });
 
   //
   // Faked other user.
   //
-  staticUserCursor.setOffset(50);
-  remoteSelectionManager.setSelectionOffsets(staticUser.id, 40, 50);
+  // staticUserCursor.setOffset(50);
+  // remoteSelectionManager.setSelectionOffsets(staticUser.id, 40, 50);
 
 
   //
@@ -66,24 +66,24 @@ require(['vs/editor/editor.main', 'MonacoCollabExt'], function(m, MonacoCollabEx
     remoteSelectionManager.setSelectionOffsets(sourceUser.id, startOffset, endOffset);
   });
 
-  const sourceContentManager = new MonacoCollabExt.EditorContentManager({
-    editor: source,
-    onInsert(index, text) {
-      target.updateOptions({readOnly: false});
-      targetContentManager.insert(index, text);
-      target.updateOptions({readOnly: true});
-    },
-    onReplace(index, length, text) {
-      target.updateOptions({readOnly: false});
-      targetContentManager.replace(index, length, text);
-      target.updateOptions({readOnly: true});
-    },
-    onDelete(index, length) {
-      target.updateOptions({readOnly: false});
-      targetContentManager.delete(index, length);
-      target.updateOptions({readOnly: true});
-    }
-  });
+  // const sourceContentManager = new MonacoCollabExt.EditorContentManager({
+  //   editor: source,
+  //   onInsert(index, text) {
+  //     target.updateOptions({readOnly: false});
+  //     targetContentManager.insert(index, text);
+  //     target.updateOptions({readOnly: true});
+  //   },
+  //   onReplace(index, length, text) {
+  //     target.updateOptions({readOnly: false});
+  //     targetContentManager.replace(index, length, text);
+  //     target.updateOptions({readOnly: true});
+  //   },
+  //   onDelete(index, length) {
+  //     target.updateOptions({readOnly: false});
+  //     targetContentManager.delete(index, length);
+  //     target.updateOptions({readOnly: true});
+  //   }
+  // });
 
 
   window.addEventListener('resize', () => {
